@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+</head>
+<body> 
+    <h1>Bienvenue sur mon portfolio</h1>
+    <script>
+    // Charger la barre de navigation
+    fetch('../shared/nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+        });
+    // Charger le pied de page
+    fetch('../shared/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+
+    </script>
+</body>
+</html>
