@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un projet</title>
-    <link rel="stylesheet" href="../style_pages/add-project.css">
+    <title>À propos</title>
+    <link rel="stylesheet" href="../style_pages/apropos.css">
 </head>
 <body>
+    <script>
+    // Charger la barre de navigation
+    fetch('../shared/nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+        });
+    // Charger le pied de page
+    fetch('../shared/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+
+    </script>
+    <div class="profile-picture">
+        <img src="../shared/img/profile.png" alt="Photo de profil">
+    </div>
     <h2>À propos de moi</h2>
     <p>Je suis un développeur passionné avec une expérience dans la création de sites web et d'applications. J'aime apprendre de nouvelles technologies et relever des défis techniques.</p>
 </body>
