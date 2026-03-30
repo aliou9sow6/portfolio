@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style_pages/add-project.css">
+    <title>Ajouter un projet</title>
+</head>
+<body>
+    <script>
+    // Charger la barre de navigation
+    fetch('../shared/nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+        });
+    // Charger le pied de page
+    fetch('../shared/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+    </script>
+
+    <div class="content">
+        <h1>Ajouter un projet</h1>
+        <form action="#" method="post">
+            <label for="title">Titre du projet:</label><br>
+            <input type="text" id="title" name="title" required><br><br>
+
+            <label for="image">l'image du projet:</label><br>
+            <input type="file" id="image" name="image"><br><br>
+
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+            <label for="link">Lien du projet:</label><br>
+            <input type="url" id="link" name="link"><br><br>
+
+            <input type="submit" value="Ajouter le projet">
+        </form>
+
+    </div>
+</html>
