@@ -1,0 +1,50 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets</title>
+    <link rel="stylesheet" href="../g-style.css">
+    <link rel="stylesheet" href="../style_pages/list-project.css">
+</head>
+<body>
+    <script>
+    // Charger la barre de navigation
+    fetch('../shared/nav.html') 
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+        });
+    // Charger le pied de page
+    fetch('../shared/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+    </script>
+
+    <h2>Mes Projets</h2>
+    <div class="projects-container">
+        <!-- Carte du projet 1 -->
+         <div>
+            <button class="add-project-btn" onclick="window.location.href='add-project.html'">Ajouter un projet</button>
+         </div>
+        <div class="project-card">
+            <h3>Dashboard</h3>
+            <p>Une application de dashboard analytique pour un magasin en ligne.</p>
+            <a href="projet1.html">Voir les détails</a>
+        </div>
+        <div class="project-card">
+            <h3>E-commerce</h3>
+            <p>Une application de e-commerce pour un magasin en ligne.</p>
+            <a href="projet2.html">Voir les détails</a>
+        </div>
+        <div class="project-card">
+            <h3>Fitnesse</h3>
+            <p>Une application de suivi de fitness pour les utilisateurs.</p>
+            <a href="projet3.html">Voir les détails</a>
+        </div>
+    </div>
+        <!-- Ajouter plus de projets ici -->
+    </div>
+</body>

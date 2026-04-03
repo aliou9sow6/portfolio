@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="g-style.css">
+    <title>Accueil</title>
+</head>
+<body> 
+    <script>
+    // Charger la barre de navigation
+    fetch('../shared/nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+        });
+    // Charger le pied de page
+    fetch('../shared/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+    </script>
+
+    <div class="content">
+        <h1>Bienvenue sur mon portfolio</h1>
+        <h2>À propos de moi</h2>
+        <p>Je suis un développeur passionné avec une expérience en développement web et mobile. J'aime créer des applications innovantes et résoudre des problèmes complexes.</p>
+
+        <h2>Mes compétences</h2>
+        <ul>
+            <li>HTML, CSS, JavaScript</li>
+            <li>React, Angular, Vue.js</li>
+            <li>Node.js, Express</li>
+            <li>Python, Django</li>
+            <li>SQL, MongoDB</li>
+        </ul>
+
+        <h2>Projets récents</h2>
+        <ul>
+            <li><a href="main_pages/projet1.html">Projet 1 - Application de gestion de tâches</a></li>
+            <li><a href="main_pages/projet2.html">Projet 2 - Site e-commerce</a></li>
+            <li><a href="main_pages/projet3.html">Projet 3 - Application mobile de fitness</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>

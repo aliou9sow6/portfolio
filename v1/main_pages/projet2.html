@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du projet</title>
+    <link rel="stylesheet" href="../style_pages/detail-project.css">
+</head>
+<body>
+    <script>
+    // Charger la barre de navigation
+    fetch('../shared/nav.html') 
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+        });
+    // Charger le pied de page
+    fetch('../shared/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+
+    </script>
+
+    <div class="details-project">
+        <h2>E-commerce</h2>
+        <img src="../shared/img/e-commerce.jpg" alt="Image du projet 2" class="project-image">
+        <p>Une application de e-commerce pour un magasin en ligne.</p>
+        <h3>Technologies utilisées:</h3>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+        </ul>
+        <h3>Liens:</h3>
+        <ul>
+            <li><a href="https://github.com" target="_blank">Dépôt GitHub</a></li>
+            <li><a href="https://www.example.com" target="_blank">Site web</a></li>
+        </ul>
+</body>
+</html>
