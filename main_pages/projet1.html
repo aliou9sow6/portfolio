@@ -4,41 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du projet</title>
-    <link rel="stylesheet" href="../style_pages/detail-project.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <script>
-    // Charger la barre de navigation
-    fetch('../shared/nav.html') 
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('afterbegin', data);
-        });
-    // Charger le pied de page
-    fetch('../shared/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('beforeend', data);
-        });
+        function fetchHtmlFragment(url) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    return match ? match[1] : html;
+                });
+        }
 
+        fetchHtmlFragment('../shared/nav.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+
+        fetchHtmlFragment('../shared/footer.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            })
+            .catch(error => console.error('Error loading footer:', error));
     </script>
 
-    <div class="details-project">
-        <h2>Dashboard</h2>
-        <img src="../shared/img/dashboard.jpg" alt="Image du projet 1" class="project-image">
-        <p>Une application de dashboard analytique pour un magasin en ligne.</p>
-        <h3>Technologies utilisées:</h3>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-        </ul>
-        <h3>Liens:</h3>
-        <ul>
-            <li><a href="https://github.com" target="_blank">Dépôt GitHub</a></li>
-            <li><a href="https://www.example.com" target="_blank">Site web</a></li>
-        </ul>
-    </div>
-
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        <div class="bg-white shadow-xl rounded-3xl border border-slate-200 overflow-hidden">
+            <div class="p-8 space-y-6">
+                <h2 class="text-3xl font-bold text-slate-900">Dashboard</h2>
+                <img src="../shared/img/dashboard.jpg" alt="Image du projet 1" class="w-full h-auto rounded-2xl border border-slate-200 shadow-sm">
+                <p class="text-slate-700 leading-7">
+                    Une application de dashboard analytique pour un magasin en ligne.
+                </p>
+                <div class="space-y-3">
+                    <h3 class="text-xl font-semibold text-slate-900">Technologies utilisées :</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700">
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-xl font-semibold text-slate-900">Liens :</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700">
+                        <li>
+                            <a href="https://github.com" target="_blank" class="text-sky-600 hover:text-sky-800 underline">
+                                Dépôt GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.example.com" target="_blank" class="text-sky-600 hover:text-sky-800 underline">
+                                Site web
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
