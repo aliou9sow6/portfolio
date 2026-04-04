@@ -1,44 +1,98 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style_pages/add-projet.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+                background-color: #0F172A;
+                color: #F1F5F9;
+            }
+        }
+    </style>
     <title>Ajouter un projet</title>
 </head>
+
 <body>
     <script>
-    // Charger la barre de navigation
-    fetch('../shared/nav.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('afterbegin', data);
-        });
-    // Charger le pied de page
-    fetch('../shared/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('beforeend', data);
-        });
+        function fetchHtmlFragment(url) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    return match ? match[1] : html;
+                });
+        }
+
+        fetchHtmlFragment('../shared/nav.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+        fetchHtmlFragment('../shared/footer.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            })
+            .catch(error => console.error('Error loading footer:', error));
     </script>
 
-    <div class="content">
-        <h1>Ajouter un projet</h1>
-        <form action="#" method="post">
-            <label for="title">Titre du projet:</label><br>
-            <input type="text" id="title" name="title" required><br><br>
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        <div class="bg-white shadow-xl rounded-3xl border border-slate-200 overflow-hidden">
+            <div>
+                <form class="p-8 space-y-6">
+                    <h2 class="text-3xl font-bold text-slate-900">Ajouter un projet</h2>
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-slate-900">Titre du projet</label>
+                        <input type="text" id="title" name="title"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                            placeholder="Titre du projet">
+                    </div>
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-slate-900">Description du projet</label>
+                        <textarea id="description" name="description" rows="4"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                            placeholder="Description du projet">
+                        </textarea>
+                    </div>
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-slate-900">Image du projet</label>
+                        <input type="file" id="image" name="image"
+                            class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-sky-600 file:text-white hover:file:bg-sky-700">  
+                    </div>
+                    <div>
+                        <label for="technologies" class="block text-sm font-medium text-slate-900">Technologies utilisées (séparées par des virgules)</label>
+                        <input type="text" id="technologies" name="technologies" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" placeholder="HTML, CSS, JavaScript">
+                    </div>
+                    <div>
+                        <label for="github" class="block text-sm font-medium text-slate-900">URL du dépôt GitHub</label>
+                        <input type="text" id="github" name="github" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" placeholder="URL du dépôt GitHub">
+                    </div>
+                    <div>
+                        <label for="website" class="block text-sm font-medium text-slate-900">URL du site web du projet</label>
+                        <input type="text" id="website" name="website" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" placeholder="URL du site web du projet">
+                    </div>
+                    <div>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                            Ajouter le projet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
 
-            <label for="image">l'image du projet:</label><br>
-            <input type="file" id="image" name="image"><br><br>
-
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
-
-            <label for="link">Lien du projet:</label><br>
-            <input type="url" id="link" name="link"><br><br>
-
-            <input type="submit" value="Ajouter le projet">
-        </form>
-
-    </div>
 </html>
