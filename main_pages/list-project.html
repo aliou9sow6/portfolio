@@ -3,48 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets</title>
-    <link rel="stylesheet" href="../g-style.css">
-    <link rel="stylesheet" href="../style_pages/list-project.css">
+    <title>Projets List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+                background-color: #0F172A;
+                color: #F1F5F9;
+            }
+        }
+    </style>
 </head>
 <body>
     <script>
-    // Charger la barre de navigation
-    fetch('../shared/nav.html') 
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('afterbegin', data);
-        });
-    // Charger le pied de page
-    fetch('../shared/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('beforeend', data);
-        });
+        function fetchHtmlFragment(url) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    return match ? match[1] : html;
+                });
+        }
+
+        fetchHtmlFragment('../shared/nav.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+        fetchHtmlFragment('../shared/footer.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
     </script>
 
-    <h2>Mes Projets</h2>
-    <div class="projects-container">
-        <!-- Carte du projet 1 -->
-         <div>
-            <button class="add-project-btn" onclick="window.location.href='add-project.html'">Ajouter un projet</button>
-         </div>
-        <div class="project-card">
-            <h3>Dashboard</h3>
-            <p>Une application de dashboard analytique pour un magasin en ligne.</p>
-            <a href="projet1.html">Voir les détails</a>
+
+
+     <!-- Recent Projects Section -->
+    <section class="py-20 px-6 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-3">Projets Récents</h2>
+                    <p class="text-slate-400">Quelques-uns de mes derniers travaux</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Project 1 -->
+                <a href="projet1.html"
+                   class="group block rounded-xl border border-slate-700 bg-slate-800/50 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/30">
+                    <div class="h-44 overflow-hidden bg-slate-700">
+                        <img src="../shared/img/dashboard.jpg"
+                             alt="Dashboard analytique"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-600/15 text-blue-400 border border-blue-500/20">Web App</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2 group-hover:text-blue-300 transition-colors">Application de Dashboard</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Dashboard analytique pour un magasin en ligne.</p>
+                        <div class="mt-4 flex gap-2 flex-wrap">
+                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">HTML</span>
+                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">CSS</span>
+                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">JS</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Project 2 -->
+                <a href="projet2.html"
+                   class="group block rounded-xl border border-slate-700 bg-slate-800/50 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/30">
+                    <div class="h-44 overflow-hidden bg-slate-700">
+                        <img src="../shared/img/e-commerce.jpg"
+                             alt="Site e-commerce"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-emerald-600/15 text-emerald-400 border border-emerald-500/20">E-commerce</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2 group-hover:text-blue-300 transition-colors">Site E-commerce</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Plateforme de vente en ligne complète.</p>
+                        <div class="mt-4 flex gap-2 flex-wrap">
+                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">React</span>
+                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">Node.js</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="projet3.html"
+                   class="group block rounded-xl border border-slate-700 bg-slate-800/50 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/30">
+                    <div class="h-44 overflow-hidden bg-slate-700">
+                        <img src="../shared/img/fitness.jpg"
+                             alt="Application mobile fitness"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-violet-600/15 text-violet-400 border border-violet-500/20">Mobile</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2 group-hover:text-blue-300 transition-colors">App Fitness Mobile</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Application mobile de suivi fitness.</p>
+                        <div class="mt-4 flex gap-2 flex-wrap">
+                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">Python</span>
+                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">Django</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
         </div>
-        <div class="project-card">
-            <h3>E-commerce</h3>
-            <p>Une application de e-commerce pour un magasin en ligne.</p>
-            <a href="projet2.html">Voir les détails</a>
-        </div>
-        <div class="project-card">
-            <h3>Fitnesse</h3>
-            <p>Une application de suivi de fitness pour les utilisateurs.</p>
-            <a href="projet3.html">Voir les détails</a>
-        </div>
-    </div>
-        <!-- Ajouter plus de projets ici -->
-    </div>
+    </section>
 </body>
