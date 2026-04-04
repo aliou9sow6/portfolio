@@ -4,28 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À propos</title>
-    <link rel="stylesheet" href="../style_pages/apropos.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+                background-color: #0F172A;
+                color: #F1F5F9;
+            }
+        }
+    </style>
 </head>
 <body>
     <script>
-    // Charger la barre de navigation
-    fetch('../shared/nav.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('afterbegin', data);
-        });
-    // Charger le pied de page
-    fetch('../shared/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('beforeend', data);
-        });
+        function fetchHtmlFragment(url) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    return match ? match[1] : html;
+                });
+        }
 
+        fetchHtmlFragment('../shared/nav.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+        fetchHtmlFragment('../shared/footer.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            })
+            .catch(error => console.error('Error loading footer:', error));
     </script>
-    <div class="profile-picture">
-        <img src="../shared/img/profile.png" alt="Photo de profil">
-    </div>
-    <h2>À propos de moi</h2>
-    <p>Je suis un développeur passionné avec une expérience dans la création de sites web et d'applications. J'aime apprendre de nouvelles technologies et relever des défis techniques.</p>
+    
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        <div class="bg-white shadow-xl rounded-3xl border border-slate-200 overflow-hidden">
+            <div class="p-8 space-y-6">
+                <h2 class="text-3xl font-bold text-slate-900">À propos de moi</h2>
+                <img src="../shared/img/profile.png" alt="Photo de profil" class="w-48 h-48 rounded-full border border-slate-200 shadow-sm">    
+                <p class="text-slate-700 leading-7">
+                    Je suis un développeur passionné avec une expérience dans la création d'applications web modernes et réactives. J'aime résoudre des problèmes complexes et créer des solutions innovantes pour les utilisateurs.
+                </p>
+                <p class="text-slate-700 leading-7">
+                    Mon parcours en développement web m'a permis de travailler sur divers projets, allant de petites applications à des plateformes plus complexes. Je suis constamment à la recherche de nouvelles technologies et de défis pour améliorer mes compétences et offrir des expériences utilisateur exceptionnelles.      
+                </p>    
+            </div>
+        </div>
+    </main>
 </body>
 </html>

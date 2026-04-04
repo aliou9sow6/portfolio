@@ -4,25 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
-    <link rel="stylesheet" href="../style_pages/contact.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+                background-color: #0F172A;
+                color: #F1F5F9;
+            }
+        }
+    </style>
 </head>
 <body>
     <script>
-    // Charger la barre de navigation
-    fetch('../shared/nav.html') 
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('afterbegin', data);
-        });
-    // Charger le pied de page
-    fetch('../shared/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('beforeend', data);
-        });
+        function fetchHtmlFragment(url) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    return match ? match[1] : html;
+                });
+        }
+
+        fetchHtmlFragment('../shared/nav.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+        fetchHtmlFragment('../shared/footer.html')
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            })
+            .catch(error => console.error('Error loading footer:', error));
 
     </script>
-    <h2>Contactez-moi</h2>
-    <p>Vous pouvez me contacter par email à <a href="mailto:monemail@example.com">monemail@example.com</a></p>
+    
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        <div class="bg-white shadow-xl rounded-3xl border border-slate-200 overflow-hidden">
+            <div>
+                <form class="p-8 space-y-6">
+                    <h2 class="text-3xl font-bold text-slate-900">Contactez-moi</h2>
+                    <p class="text-slate-700 leading-7">Vous avez des questions ou souhaitez collaborer ? N'hésitez pas à me contacter en utilisant le formulaire ci-dessous :</p>
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-slate-900">Nom</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" placeholder="Votre nom">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-900">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" placeholder="Votre adresse email">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-slate-900">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm" placeholder="Votre message"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                            Envoyer
+                        </button>
+                    </div>
+                </form>
+            </div>
+            </div>
+          <h2 class="p-8 text-3xl font-bold text-slate-900">Contact</h2>
+            <div class="p-8 space-y-6">
+                <p class="text-slate-700 leading-7">Vous pouvez me contacter via les moyens suivants :</p>
+                <ul class="list-disc list-inside space-y-2 text-slate-700">
+                    <li>LinkedIn : <a href="https://www.linkedin.com/in/aliou_saidou_nourou_sow/" target="_blank" class="text-sky-600 hover:text-sky-800 underline">anoors</a></li>
+                    <li>GitHub : <a href="https://github.com/aliou9sow6" target="_blank" class="text-sky-600 hover:text-sky-800 underline">anoors</a></li>
+                    <li>Email : <a href="mailto:anoors.dev@gmail.com" class="text-sky-600 hover:text-sky-800 underline">anoors</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
 </body>
 </html>
