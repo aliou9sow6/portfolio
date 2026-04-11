@@ -1,139 +1,141 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets List</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style type="text/tailwindcss">
-        @layer base {
-            body {
-                font-family: 'Inter', system-ui, sans-serif;
-                background-color: #0F172A;
-                color: #F1F5F9;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets — Anoor's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer base {
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background-color: #0F172A;
+        color: #F1F5F9;
+      }
+    }
+  </style>
 </head>
 <body>
-    <script>
-        function fetchHtmlFragment(url) {
-            return fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`${response.status} ${response.statusText}`);
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                    return match ? match[1] : html;
-                });
-        }
 
-        fetchHtmlFragment('../shared/nav.html')
-            .then(data => {
-                document.body.insertAdjacentHTML('afterbegin', data);
-            })
-            .catch(error => console.error('Error loading navigation:', error));
-        fetchHtmlFragment('../shared/footer.html')
-            .then(data => {
-                document.body.insertAdjacentHTML('beforeend', data);
-            })
-            .catch(error => console.error('Error loading footer:', error));
+  <!-- Chargement de la navigation et du footer -->
+  <script>
+    function fetchHtmlFragment(url) {
+      return fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+          return response.text();
+        })
+        .then(html => {
+          const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+          return match ? match[1] : html;
+        });
+    }
 
-    </script>
+    fetchHtmlFragment('../shared/nav.html')
+      .then(data => document.body.insertAdjacentHTML('afterbegin', data))
+      .catch(err => console.error('Erreur chargement nav :', err));
 
+    fetchHtmlFragment('../shared/footer.html')
+      .then(data => document.body.insertAdjacentHTML('beforeend', data))
+      .catch(err => console.error('Erreur chargement footer :', err));
+  </script>
 
+  <!-- Section principale -->
+  <section class="py-20 px-6 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto">
 
-     <!-- Recent Projects Section -->
-    <section class="py-20 px-6 border-t border-slate-800">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
-                <!-- ajouter un projet -->
-                 <div>
-                    <a href="add-project.html" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        Ajouter un projet
-                    </a>
-                </div>
-                <div>
-                    <h2 class="text-3xl font-bold text-white mb-3">Projets Récents</h2>
-                    <p class="text-slate-400">Quelques-uns de mes derniers travaux</p>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- Project 1 -->
-                <a href="projet1.html"
-                   class="group block rounded-xl border border-slate-700 bg-slate-800/50 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/30">
-                    <div class="h-44 overflow-hidden bg-slate-700">
-                        <img src="../shared/img/dashboard.jpg"
-                             alt="Dashboard analytique"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-600/15 text-blue-400 border border-blue-500/20">Web App</span>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2 group-hover:text-blue-300 transition-colors">Application de Dashboard</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Dashboard analytique pour un magasin en ligne.</p>
-                        <div class="mt-4 flex gap-2 flex-wrap">
-                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">HTML</span>
-                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">CSS</span>
-                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">JS</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Project 2 -->
-                <a href="projet2.html"
-                   class="group block rounded-xl border border-slate-700 bg-slate-800/50 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/30">
-                    <div class="h-44 overflow-hidden bg-slate-700">
-                        <img src="../shared/img/e-commerce.jpg"
-                             alt="Site e-commerce"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-emerald-600/15 text-emerald-400 border border-emerald-500/20">E-commerce</span>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2 group-hover:text-blue-300 transition-colors">Site E-commerce</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Plateforme de vente en ligne complète.</p>
-                        <div class="mt-4 flex gap-2 flex-wrap">
-                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">React</span>
-                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">Node.js</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="projet3.html"
-                   class="group block rounded-xl border border-slate-700 bg-slate-800/50 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/30">
-                    <div class="h-44 overflow-hidden bg-slate-700">
-                        <img src="../shared/img/fitness.jpg"
-                             alt="Application mobile fitness"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-violet-600/15 text-violet-400 border border-violet-500/20">Mobile</span>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2 group-hover:text-blue-300 transition-colors">App Fitness Mobile</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Application mobile de suivi fitness.</p>
-                        <div class="mt-4 flex gap-2 flex-wrap">
-                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">Python</span>
-                            <span class="text-xs px-2 py-1 rounded-md bg-slate-700/80 text-slate-300 font-medium">Django</span>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
+      <!-- En-tête de section -->
+      <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
+        <div>
+          <a href="add-project.html"
+             class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Ajouter un projet
+          </a>
         </div>
-    </section>
+        <div class="text-right">
+          <h2 class="text-3xl font-bold text-white mb-1">Projets Récents</h2>
+          <p class="text-slate-400 text-sm">
+            Quelques-uns de mes derniers travaux —
+            <span id="projets-compteur" class="text-slate-500 font-normal"></span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Grille de projets (remplie dynamiquement) -->
+      <div id="projets-grille" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Les cartes sont insérées par list-projects.js -->
+      </div>
+
+      <!-- État vide -->
+      <div id="etat-vide" class="hidden text-center py-24">
+        <div class="text-6xl mb-5">📂</div>
+        <h3 class="text-xl font-semibold text-white mb-3">Aucun projet pour le moment</h3>
+        <p class="text-slate-400 mb-8">Commencez par ajouter votre premier projet.</p>
+        <a href="add-project.html"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors font-semibold">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          Ajouter mon premier projet
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Modal de confirmation de suppression ─────────────────────────── -->
+  <div id="modal-confirmation"
+       class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 max-w-md w-full shadow-2xl">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-full bg-red-600/20 border border-red-500/30 flex items-center justify-center flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-white font-semibold text-lg mb-1">Supprimer le projet</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Êtes-vous sûr de vouloir supprimer
+            <strong class="text-white">"<span id="modal-titre-projet"></span>"</strong> ?
+            Cette action est irréversible.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-3 justify-end">
+        <button id="btn-annuler-suppression"
+                class="px-5 py-2.5 border border-slate-600 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium">
+          Annuler
+        </button>
+        <button id="btn-confirmer-suppression"
+                class="px-5 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Toast notification ───────────────────────────────────────────── -->
+  <div id="toast"
+       class="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-xl text-white font-medium shadow-2xl
+              flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 ease-in-out
+              bg-green-600 pointer-events-none">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span id="toast-message"></span>
+  </div>
+
+  <!-- ── Scripts ──────────────────────────────────────────────────────── -->
+  <script src="../js/projects-store.js"></script>
+  <script src="../js/list-projects.js"></script>
+
 </body>
+</html>
