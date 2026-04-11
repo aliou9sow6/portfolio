@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détail du projet — Anoor's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer base {
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background-color: #0F172A;
+        color: #F1F5F9;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Placeholder navigation -->
+  <div id="nav-placeholder"></div>
+
+  <!-- Contenu principal -->
+  <main class="max-w-5xl mx-auto px-4 py-10">
+
+    <!-- Lien retour -->
+    <a href="list-project.html"
+       class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Retour aux projets
+    </a>
+
+    <!-- Carte de détail (remplie dynamiquement) -->
+    <div id="detail-contenu"
+         class="bg-white shadow-xl rounded-3xl border border-slate-200 overflow-hidden min-h-64
+                flex items-center justify-center">
+      <!-- Indicateur de chargement -->
+      <div class="text-center py-16">
+        <div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p class="text-slate-400 text-sm">Chargement du projet…</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Placeholder footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../js/projects-store.js"></script>
+  <script src="../js/project-detail.js"></script>
+
+</body>
+</html>
